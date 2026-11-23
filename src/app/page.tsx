@@ -220,7 +220,7 @@ export default function Home() {
           <Heading kicker="What to Wear" title="Dress Code" />
           <div className="attire">
             <figure className="attire-img reveal-img">
-              <img src={img("bouquet")} alt="" loading="lazy" decoding="async" width={1024} height={1536} />
+              <img src={img("attire")} alt="A tuxedo and a champagne evening gown with pearls and gold accessories" loading="lazy" decoding="async" width={1024} height={1536} />
             </figure>
             <div className="attire-copy stagger">
               <h3>{dressCode.title}</h3>

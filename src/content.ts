@@ -143,6 +143,53 @@ export const stay = {
     { name: "Lauderdale-by-the-Sea", why: "Relaxed small beach town about 15 to 20 minutes north." },
   ],
   hotels: {
+    budget: {
+      label: "Budget-friendly",
+      range: "$110 to $200",
+      items: [
+        {
+          name: "Sea Spray Inn",
+          distance: "Lauderdale-by-the-Sea, about 15 to 20 minutes north",
+          price: "$110 to $190",
+          note: "",
+          url: "https://seasprayinn.com/",
+        },
+        {
+          name: "Hotels near FLL airport and Las Olas",
+          distance: "10 to 15 minutes by car",
+          price: "$110 to $200",
+          note: "Many chain options. Book early for the best rate.",
+          url: "https://www.google.com/travel/hotels/Fort%20Lauderdale?q=hotels%20near%20Fort%20Lauderdale%20Beach&dates=2027-09-18,2027-09-20",
+        },
+      ],
+    },
+    mid: {
+      label: "Mid-range",
+      range: "$180 to $320",
+      items: [
+        {
+          name: "Marriott's BeachPlace Towers",
+          distance: "Part of Beach Place, about a 1 to 2 minute walk",
+          price: "$200 to $350",
+          note: "Closest stay to the venue",
+          url: "https://www.marriott.com/en-us/hotels/fllbp-marriotts-beachplace-towers/overview/",
+        },
+        {
+          name: "Courtyard Fort Lauderdale Beach Oceanside",
+          distance: "About 1 to 2 miles south, a short ride",
+          price: "$170 to $280",
+          note: "",
+          url: "https://www.marriott.com/en-us/hotels/fllco-courtyard-oceanside-fort-lauderdale-beach/overview/",
+        },
+        {
+          name: "Fort Lauderdale Marriott Harbor Beach Resort & Spa",
+          distance: "About 2 miles south, a 10 minute ride",
+          price: "$220 to $380",
+          note: "",
+          url: "https://www.marriott.com/en-us/hotels/fllsb-fort-lauderdale-marriott-harbor-beach-resort-and-spa/overview/",
+        },
+      ],
+    },
     luxury: {
       label: "Luxury",
       range: "$300 to $600+",
@@ -181,53 +228,6 @@ export const stay = {
           price: "$250 to $450",
           note: "",
           url: "https://www.hilton.com/en/hotels/fllcici-conrad-fort-lauderdale-beach/",
-        },
-      ],
-    },
-    mid: {
-      label: "Mid-range",
-      range: "$180 to $320",
-      items: [
-        {
-          name: "Marriott's BeachPlace Towers",
-          distance: "Part of Beach Place, about a 1 to 2 minute walk",
-          price: "$200 to $350",
-          note: "Closest stay to the venue",
-          url: "https://www.marriott.com/en-us/hotels/fllbp-marriotts-beachplace-towers/overview/",
-        },
-        {
-          name: "Courtyard Fort Lauderdale Beach Oceanside",
-          distance: "About 1 to 2 miles south, a short ride",
-          price: "$170 to $280",
-          note: "",
-          url: "https://www.marriott.com/en-us/hotels/fllco-courtyard-oceanside-fort-lauderdale-beach/overview/",
-        },
-        {
-          name: "Fort Lauderdale Marriott Harbor Beach Resort & Spa",
-          distance: "About 2 miles south, a 10 minute ride",
-          price: "$220 to $380",
-          note: "",
-          url: "https://www.marriott.com/en-us/hotels/fllsb-fort-lauderdale-marriott-harbor-beach-resort-and-spa/overview/",
-        },
-      ],
-    },
-    budget: {
-      label: "Budget-friendly",
-      range: "$110 to $200",
-      items: [
-        {
-          name: "Sea Spray Inn",
-          distance: "Lauderdale-by-the-Sea, about 15 to 20 minutes north",
-          price: "$110 to $190",
-          note: "",
-          url: "https://seasprayinn.com/",
-        },
-        {
-          name: "Hotels near FLL airport and Las Olas",
-          distance: "10 to 15 minutes by car",
-          price: "$110 to $200",
-          note: "Many chain options. Book early for the best rate.",
-          url: "https://www.google.com/travel/hotels/Fort%20Lauderdale?q=hotels%20near%20Fort%20Lauderdale%20Beach&dates=2027-09-18,2027-09-20",
         },
       ],
     },
