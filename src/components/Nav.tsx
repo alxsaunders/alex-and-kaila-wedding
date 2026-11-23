@@ -5,6 +5,7 @@ import { couple } from "@/content";
 
 const LINKS = [
   ["Details", "#details"],
+  ["Venue", "#venue"],
   ["Dress Code", "#attire"],
   ["Travel", "#travel"],
   ["FAQ", "#faq"],

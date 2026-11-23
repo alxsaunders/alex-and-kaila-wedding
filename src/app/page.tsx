@@ -2,8 +2,11 @@ import Countdown from "@/components/Countdown";
 import Motion from "@/components/Motion";
 import Nav from "@/components/Nav";
 import RsvpForm from "@/components/RsvpForm";
+import Stay from "@/components/Stay";
 import { couple, dressCode, faq, rsvp, schedule, travel, venue, wedding, welcome } from "@/content";
-import { img } from "@/themes";
+import { BASE, img } from "@/themes";
+
+const vimg = (n: string) => `${BASE}/venue/${n}.jpg`;
 
 function Flourish() {
   return (
@@ -131,8 +134,8 @@ export default function Home() {
                 {venue.cityLine}
               </p>
               <p className="muted">{venue.setting}</p>
-              <a className="link" href={venue.mapUrl} target="_blank" rel="noreferrer">
-                Open in Maps
+              <a className="link" href="#venue">
+                See the venue &amp; map
               </a>
             </article>
           </div>
@@ -154,16 +157,62 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="section venue" id="venue">
+          <Heading kicker="The Venue" title="Crystal Ballroom" />
+          <p className="center venue-intro reveal">
+            {venue.locatedIn}. {venue.spaces}
+          </p>
+          <div className="venue-grid">
+            <figure className="v-main reveal-img">
+              <img src={vimg("ballroom")} alt="The Crystal Ballroom set for a reception" loading="lazy" decoding="async" />
+            </figure>
+            <figure className="reveal-img" style={{ ["--d" as string]: "0.1s" }}>
+              <img src={vimg("exterior")} alt="Crystal Ballroom at Beach Place" loading="lazy" decoding="async" />
+            </figure>
+            <figure className="reveal-img" style={{ ["--d" as string]: "0.2s" }}>
+              <img src={vimg("tablescape")} alt="A candlelit tablescape in the ballroom" loading="lazy" decoding="async" />
+            </figure>
+            <figure className="reveal-img" style={{ ["--d" as string]: "0.1s" }}>
+              <img src={vimg("long-table")} alt="A long banquet table in the ballroom" loading="lazy" decoding="async" />
+            </figure>
+            <figure className="reveal-img" style={{ ["--d" as string]: "0.2s" }}>
+              <img src={vimg("tables")} alt="Tables under soft uplighting" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+          <p className="credit">{venue.photoCredit}</p>
+
+          <div className="map-wrap reveal">
+            <iframe
+              title="Map to Crystal Ballroom BeachPlace"
+              src={venue.mapEmbed}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <div className="map-card">
+              <p className="card-label">Find Us</p>
+              <h3>{venue.name}</h3>
+              <p>
+                {venue.street}
+                <br />
+                {venue.cityLine}
+              </p>
+              <a className="btn btn-gold" href={venue.directionsUrl} target="_blank" rel="noreferrer">
+                Get Directions
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section className="band reveal-img" aria-hidden>
           <picture className="band-media" data-speed="0.14">
-            <source media="(max-width: 700px)" srcSet={img("terrace-sm")} />
-            <img src={img("terrace")} alt="" loading="lazy" decoding="async" />
+            <img src={vimg("beach")} alt="" loading="lazy" decoding="async" />
           </picture>
           <div className="band-shade" />
           <p className="band-text reveal">
-            An evening of love,
+            Steps from
             <br />
-            candlelight &amp; deep wine
+            Fort Lauderdale Beach
           </p>
         </section>
 
@@ -201,7 +250,7 @@ export default function Home() {
 
         <section className="section champagne" id="travel">
           <Heading kicker="Getting There" title="Travel & Stay" />
-          <div className="cards three stagger">
+          <div className="cards stagger">
             <article className="card">
               <p className="card-label">Flying In</p>
               <ul className="plain">
@@ -214,25 +263,11 @@ export default function Home() {
               </ul>
             </article>
             <article className="card">
-              <p className="card-label">Where to Stay</p>
-              {travel.hotels ? (
-                <ul className="plain">
-                  {travel.hotels.map((h) => (
-                    <li key={h.name}>
-                      <strong>{h.name}</strong>
-                      <span>{h.note}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>Hotel suggestions and any room block details are coming soon. Check back here.</p>
-              )}
-            </article>
-            <article className="card">
               <p className="card-label">Parking</p>
               <p>{travel.parking}</p>
             </article>
           </div>
+          <Stay />
         </section>
 
         <section className="section" id="faq">
