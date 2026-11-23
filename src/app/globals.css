@@ -25,9 +25,13 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* no rubber-band pull at the top or bottom; if a browser still bounces, it shows wine, never white */
+  background: var(--wine-deep);
+  overscroll-behavior: none;
 }
 body {
   margin: 0;
+  overscroll-behavior: none;
   background: var(--ivory);
   color: var(--ink);
   font-family: var(--serif);
