@@ -64,10 +64,12 @@ export const travel = {
   hotels: null as null | { name: string; note: string; url?: string }[],
 };
 
-// RSVP deadline: waiting on the couple. Leave null to show "coming soon".
+// RSVP deadline from the couple, 2026-11-23.
 export const rsvp = {
-  deadline: null as string | null,
-  open: false,
+  deadline: "Monday, August 9, 2027" as string | null,
+  deadlineShort: "August 9, 2027",
+  // Form closes at the end of the deadline day, Eastern time.
+  closesISO: "2027-08-10T00:00:00-04:00",
 };
 
 export const faq: { q: string; a: string }[] = [
@@ -88,3 +90,23 @@ export const faq: { q: string; a: string }[] = [
     a: "Yes, photos and videos with no flash are fine. Please do not get in the way of our photographers and videographers.",
   },
 ];
+
+// RSVP replies go to a Google Form in the couple's Google account (free),
+// which saves them in a Google Sheet. Filled in once the form exists.
+export const rsvpForm = {
+  // Form "Alex & Kaila Wedding RSVP" in the owner's Google account.
+  // Edit: https://docs.google.com/forms/d/1Eo_W_Mvr7-7PLAo_uMo-ehRXWoMS1GVos5WWYNjLg6A/edit
+  action:
+    "https://docs.google.com/forms/d/e/1FAIpQLScvacFrl1O2gneFb9UKHYfIUs8l4Tc-cE1lGYtouzcN_ryhKQ/formResponse",
+  yes: "Joyfully accepts",
+  no: "Regretfully declines",
+  fields: {
+    name: "entry.1979156252",
+    attending: "entry.621372912",
+    party: "entry.172222965",
+    guests: "entry.683699938",
+    contact: "entry.1026671553",
+    dietary: "entry.1315505789",
+    message: "entry.1872510732",
+  },
+};

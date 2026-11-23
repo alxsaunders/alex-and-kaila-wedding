@@ -1,28 +1,28 @@
 import Countdown from "@/components/Countdown";
+import Motion from "@/components/Motion";
 import Nav from "@/components/Nav";
-import Reveal from "@/components/Reveal";
-import ThemePicker from "@/components/ThemePicker";
+import RsvpForm from "@/components/RsvpForm";
 import { couple, dressCode, faq, rsvp, schedule, travel, venue, wedding, welcome } from "@/content";
-import { BASE, SHOW_THEME_PICKER, THEMES } from "@/themes";
+import { img } from "@/themes";
 
-function Ornament() {
+function Flourish() {
   return (
-    <div className="ornament" aria-hidden>
-      <span />
-      <svg viewBox="0 0 24 24" width="14" height="14">
-        <path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" />
-      </svg>
-      <span />
-    </div>
+    <svg className="flourish draw" viewBox="0 0 220 24" aria-hidden>
+      <path d="M0 12 H86" pathLength={1} />
+      <path d="M220 12 H134" pathLength={1} />
+      <path d="M110 3 L116 12 L110 21 L104 12 Z" className="fill" />
+      <circle cx="94" cy="12" r="1.8" className="fill" />
+      <circle cx="126" cy="12" r="1.8" className="fill" />
+    </svg>
   );
 }
 
-function Heading({ kicker, title }: { kicker: string; title: string }) {
+function Heading({ kicker, title, light }: { kicker: string; title: string; light?: boolean }) {
   return (
-    <header className="section-head">
+    <header className={"section-head stagger" + (light ? " light" : "")}>
       <p className="kicker">{kicker}</p>
       <h2>{title}</h2>
-      <Ornament />
+      <Flourish />
     </header>
   );
 }
@@ -30,52 +30,89 @@ function Heading({ kicker, title }: { kicker: string; title: string }) {
 export default function Home() {
   return (
     <>
+      <Motion />
       <Nav />
-      <Reveal />
 
       <section className="hero" id="top">
-        {THEMES.map((t) => (
-          <div
-            key={t.slug}
-            className="hero-bg"
-            data-for={t.slug}
-            style={{ backgroundImage: `url(${BASE}/themes/${t.slug}-hero.jpg)` }}
-          />
-        ))}
+        <picture className="hero-media" data-speed="-0.12">
+          <source media="(max-width: 700px)" srcSet={img("hero-sm")} />
+          <img src={img("hero")} alt="" fetchPriority="high" />
+        </picture>
         <div className="hero-shade" />
+        <div className="hero-frame" aria-hidden />
         <div className="hero-inner">
-          <p className="hero-kicker">We are getting married</p>
-          <h1 className="hero-names">
-            {couple.first}
+          <p className="hero-kicker h-in" style={{ ["--d" as string]: "0.1s" }}>
+            Together with their families
+          </p>
+          <h1 className="hero-names h-in" style={{ ["--d" as string]: "0.3s" }}>
+            <span>{couple.first}</span>
             <span className="amp">&amp;</span>
-            {couple.second}
+            <span>{couple.second}</span>
           </h1>
-          <p className="hero-date">{wedding.dateLong}</p>
-          <p className="hero-place">{wedding.city}</p>
-          <Countdown iso={wedding.startISO} />
-          <a href="#rsvp" className="btn btn-hero">
-            RSVP
-          </a>
+          <p className="hero-sub h-in" style={{ ["--d" as string]: "0.55s" }}>
+            invite you to celebrate their wedding
+          </p>
+          <div className="h-in" style={{ ["--d" as string]: "0.7s" }}>
+            <Flourish />
+          </div>
+          <p className="hero-date h-in" style={{ ["--d" as string]: "0.8s" }}>
+            {wedding.dateLong}
+          </p>
+          <p className="hero-place h-in" style={{ ["--d" as string]: "0.9s" }}>
+            {wedding.city}
+          </p>
+          <div className="h-in" style={{ ["--d" as string]: "1.05s" }}>
+            <a href="#rsvp" className="btn btn-gold btn-hero">
+              RSVP Now
+            </a>
+            <p className="hero-deadline">Kindly reply by {rsvp.deadlineShort}</p>
+          </div>
+          <div className="h-in" style={{ ["--d" as string]: "1.2s" }}>
+            <Countdown iso={wedding.startISO} />
+          </div>
         </div>
-        <a href="#welcome" className="hero-scroll" aria-label="Scroll down">
+        <a href="#rsvp" className="hero-scroll" aria-label="Scroll to RSVP">
           <span />
         </a>
       </section>
 
       <main>
-        <section className="section welcome reveal" id="welcome">
-          <Ornament />
-          <p className="welcome-text">{welcome}</p>
-          <p className="signature">
-            With love, {couple.first} &amp; {couple.second}
-          </p>
+        <section className="section wine rsvp-first" id="rsvp">
+          <Heading kicker={"Kindly reply by " + rsvp.deadline} title="RSVP" light />
+          <div className="rsvp-card reveal">
+            <RsvpForm />
+          </div>
         </section>
 
-        <section className="section alt" id="details">
-          <div className="reveal">
-            <Heading kicker="The Celebration" title="Wedding Details" />
+        <section className="section us" id="welcome">
+          <div className="us-grid">
+            <figure className="us-photo reveal-img">
+              <img
+                src={img("us-900")}
+                srcSet={`${img("us-900")} 900w, ${img("us")} 1350w`}
+                sizes="(max-width: 860px) 88vw, 380px"
+                width={1350}
+                height={2400}
+                alt={`${couple.first} and ${couple.second}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <div className="us-copy stagger">
+              <p className="kicker">Welcome</p>
+              <p className="script-title">
+                {couple.first} &amp; {couple.second}
+              </p>
+              <Flourish />
+              <p className="welcome-text">{welcome}</p>
+              <p className="signature">With love</p>
+            </div>
           </div>
-          <div className="cards reveal">
+        </section>
+
+        <section className="section champagne" id="details">
+          <Heading kicker="The Celebration" title="Wedding Details" />
+          <div className="cards stagger">
             <article className="card">
               <p className="card-label">When</p>
               <h3>{wedding.dateLong}</h3>
@@ -100,9 +137,9 @@ export default function Home() {
             </article>
           </div>
 
-          <div className="timeline reveal">
-            <h3 className="timeline-title">Order of the Evening</h3>
-            <ol>
+          <div className="timeline">
+            <p className="script-sub reveal">Order of the Evening</p>
+            <ol className="stagger">
               {schedule.map((s) => (
                 <li key={s.name}>
                   <span className="t-time">{s.time ?? "Time to come"}</span>
@@ -117,22 +154,26 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="band reveal-img" aria-hidden>
+          <picture className="band-media" data-speed="0.14">
+            <source media="(max-width: 700px)" srcSet={img("terrace-sm")} />
+            <img src={img("terrace")} alt="" loading="lazy" decoding="async" />
+          </picture>
+          <div className="band-shade" />
+          <p className="band-text reveal">
+            An evening of love,
+            <br />
+            candlelight &amp; deep wine
+          </p>
+        </section>
+
         <section className="section" id="attire">
-          <div className="reveal">
-            <Heading kicker="What to Wear" title="Dress Code" />
-          </div>
-          <div className="attire reveal">
-            <div className="attire-img">
-              {THEMES.map((t) => (
-                <div
-                  key={t.slug}
-                  className="detail-bg"
-                  data-for={t.slug}
-                  style={{ backgroundImage: `url(${BASE}/themes/${t.slug}-detail.jpg)` }}
-                />
-              ))}
-            </div>
-            <div className="attire-copy">
+          <Heading kicker="What to Wear" title="Dress Code" />
+          <div className="attire">
+            <figure className="attire-img reveal-img">
+              <img src={img("bouquet")} alt="" loading="lazy" decoding="async" width={1024} height={1536} />
+            </figure>
+            <div className="attire-copy stagger">
               <h3>{dressCode.title}</h3>
               <p>{dressCode.body}</p>
               <p className="muted">{dressCode.avoidText}</p>
@@ -149,11 +190,18 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section alt" id="travel">
-          <div className="reveal">
-            <Heading kicker="Getting There" title="Travel & Stay" />
-          </div>
-          <div className="cards three reveal">
+        <section className="duo" aria-hidden>
+          <figure className="reveal-img">
+            <img src={img("table")} alt="" loading="lazy" decoding="async" />
+          </figure>
+          <figure className="reveal-img" style={{ ["--d" as string]: "0.15s" }}>
+            <img src={img("cake")} alt="" loading="lazy" decoding="async" />
+          </figure>
+        </section>
+
+        <section className="section champagne" id="travel">
+          <Heading kicker="Getting There" title="Travel & Stay" />
+          <div className="cards three stagger">
             <article className="card">
               <p className="card-label">Flying In</p>
               <ul className="plain">
@@ -187,45 +235,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section rsvp-section" id="rsvp">
-          <div className="reveal">
-            <Heading kicker="Kindly Reply" title="RSVP" />
-          </div>
-          <div className="rsvp-card reveal">
-            <p className="rsvp-deadline">
-              {rsvp.deadline ? (
-                <>
-                  Please reply by <strong>{rsvp.deadline}</strong>
-                </>
-              ) : (
-                <>The reply-by date is coming soon</>
-              )}
-            </p>
-            <p>
-              RSVPs open once invitations go out. When they do, type your name here to find your
-              invitation, then answer for everyone in your party, including any food allergies or
-              dietary needs.
-            </p>
-            <form className="rsvp-form" aria-disabled>
-              <label htmlFor="rsvp-name" className="sr-only">
-                Your full name
-              </label>
-              <input id="rsvp-name" placeholder="Your full name" disabled />
-              <button type="button" className="btn" disabled>
-                Find my invitation
-              </button>
-            </form>
-            <p className="muted small">
-              Plus-ones and children must be confirmed by {couple.first} or {couple.second}.
-            </p>
-          </div>
-        </section>
-
-        <section className="section alt" id="faq">
-          <div className="reveal">
-            <Heading kicker="Good to Know" title="Questions & Answers" />
-          </div>
-          <div className="faq reveal">
+        <section className="section" id="faq">
+          <Heading kicker="Good to Know" title="Questions & Answers" />
+          <div className="faq stagger">
             {faq.map((f) => (
               <details key={f.q}>
                 <summary>{f.q}</summary>
@@ -235,12 +247,15 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="registry">
-          <div className="reveal">
-            <Heading kicker="With Gratitude" title="Registry" />
-          </div>
+        <section className="section champagne" id="registry">
+          <Heading kicker="With Gratitude" title="Registry" />
           <p className="center reveal">
             Your presence is the greatest gift. Registry details will be shared here soon.
+          </p>
+          <p className="center reveal" style={{ marginTop: "2rem" }}>
+            <a href="#rsvp" className="btn btn-gold">
+              RSVP by {rsvp.deadlineShort}
+            </a>
           </p>
         </section>
       </main>
@@ -249,11 +264,14 @@ export default function Home() {
         <p className="footer-names">
           {couple.first} &amp; {couple.second}
         </p>
-        <p>{wedding.dateShort}</p>
-        <p className="muted small">{wedding.city}</p>
+        <Flourish />
+        <p className="footer-date">{wedding.dateShort}</p>
+        <p className="small soft">{wedding.city}</p>
       </footer>
 
-      {SHOW_THEME_PICKER && <ThemePicker />}
+      <a href="#rsvp" className="sticky-rsvp">
+        RSVP by {rsvp.deadlineShort}
+      </a>
     </>
   );
 }
